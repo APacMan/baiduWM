@@ -1,0 +1,1609 @@
+@charset "UTF-8";
+@import "normalize.scss";
+@import "../lib/swiper/swiper.min";
+@import "base.scss";
+
+//设置高度100%
+html, body {
+  width: 100%;
+}
+
+@function p2r($size) {
+  @return ($size/32)*1rem;
+}
+
+//设置图片居中
+@mixin bgc($url, $width) {
+  background: url($url) no-repeat center / 100% 100%;
+  position: absolute;
+  left: 50%;
+  margin-left: p2r(-$width/2);
+}
+
+//设置背景图，不考虑居中
+@mixin bg($url) {
+  background: url($url) no-repeat center / 100% 100%;
+  position: absolute;
+}
+
+//设置尺寸
+@mixin size($width, $height) {
+  width: p2r($width);
+  height: p2r($height);
+}
+
+//loading页面
+.loading {
+  width: 100%;
+  position: absolute;
+  height: 100%;
+  top: 0;
+  background: #ffece9;
+  z-index: 3;
+  .rider {
+    @include size(154, 121);
+    position: absolute;
+    background: url("../images/loading/rider1_.png") no-repeat center / 100% 100%;
+    top: (233/32)*1rem;
+    right: (108/32)*1rem;
+  }
+  .progress {
+    @include size(416, 20);
+    background-color: #fc2e4d;
+    border: 2px solid #373838;
+    border-radius: (20/32)*1rem;
+    position: absolute;
+    left: 50%;
+    margin-left: (-416/32/2)*1rem;
+    top: (360/32)*1rem;
+  }
+  .info {
+    @include size(220, 28);
+    @include bgc('../images/loading/loading-txt.png', 220);
+    //background: url("../images/loading/loading-txt.png") no-repeat center / 100% 100%;
+    //position: absolute;
+    //left: 50%;
+    //margin-left: (-220/32/2)*1rem;
+    top: (420/32)*1rem;
+  }
+  .logo {
+    @include size(162, 39);
+    @include bgc('../images/loading/waimai-logo.png', 162);
+    //background: url("../images/loading/waimai-logo.png") no-repeat center / 100% 100%;
+    //position: absolute;
+    bottom: (118/32)*1rem;
+    //left: 50%;
+    //margin-left: (-162/32/2)*1rem;
+  }
+  .copyright {
+    font-size: (24/32)*1rem;
+    color: #e0979d;
+    position: absolute;
+    bottom: (73/32)*1rem;
+    text-align: center;
+    width: 100%;
+  }
+
+}
+
+//欢迎页面
+.welcome {
+  background-color: deepskyblue;
+  position: absolute;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 2;
+  //顶部的文字
+  .info {
+    @include size(397, 224);
+    background: url("../images/page1/theme-title.png") no-repeat center / 100% 100%;
+    position: absolute;
+    top: (42/32)*1rem;
+    left: 50%;
+    margin-left: (-397/32/2)*1rem;
+    //hello文字
+    .hello {
+      @include size(70, 75);
+      background: url("../images/page1/hello.png") no-repeat center / 100% 100%;
+      position: absolute;
+      top: (20/32)*1rem;
+      right: (8/32)*1rem;
+    }
+  }
+  //熊盒子
+  .bear-box {
+    @include size(167, 279);
+    position: absolute;
+    bottom: (346/32)*1rem;
+    left: 50%;
+    margin-left: (-167/32/2)*1rem;
+    .bear {
+      width: 100%;
+      height: 100%;
+      background: url("../images/page1/rider2.png") no-repeat center / 100% 100%;
+      position: absolute;
+      left: 0;
+      top: 0;
+    }
+    .smoke {
+      @include size(167, 32);
+      background: url("../images/page1/jet1.png") no-repeat center / 100% 100%;
+      position: absolute;
+      bottom: 0;
+    }
+  }
+  //云
+  .cloud {
+    @include size(640, 640);
+    bottom: 0;
+    position: absolute;
+    background: url("../images/page1/clouds.png") no-repeat center / 100% 100%;
+
+  }
+  //草地
+  .grass1 {
+    @include size(640, 396);
+    bottom: 0;
+    position: absolute;
+    background: url("../images/page1/grass1.png") no-repeat center / 100% 100%;
+  }
+  //树
+  .trees {
+    @include size(599, 71);
+    bottom: (352/32)*1rem;
+    position: absolute;
+    background: url("../images/page1/trees.png") no-repeat center / 100% 100%;
+  }
+  //草2
+  .grass2 {
+    @include size(640, 228);
+    bottom: 0;
+    position: absolute;
+    background: url("../images/page1/grass2.png") no-repeat center / 100% 100%;
+  }
+
+  //旋转的按钮
+  .rotate-btn-box {
+    @include size(208, 208);
+    position: absolute;
+    bottom: (86/32)*1rem;
+    left: 50%;
+    margin-left: (-208/32/2)*1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .btn {
+      @include size(124, 113);
+      background: url("../images/page1/bear-btn-aft.png") no-repeat center / 100% 100%;
+    }
+    .circle1 {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: url("../images/page1/circle1.png") no-repeat center / 100% 100%;
+    }
+    .circle2 {
+      width: 100%;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 0;
+      background: url("../images/page1/circle2.png") no-repeat center / 100% 100%;
+    }
+
+  }
+}
+
+// swiper样式
+.waimai-container {
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+//共有标题样式
+.title {
+  position: absolute;
+  left: p2r(32);
+  top: p2r(32);
+  padding-left: p2r(20);
+  h3 {
+    color: white;
+    font-size: p2r(64);
+  }
+  p {
+    color: white;
+    font-size: p2r(24);
+    padding-top: p2r(12);
+  }
+  .line {
+    height: 100%;
+    width: p2r(5);
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+}
+
+//轮播的页面
+.page1 {
+  background-color: #be8651;
+  .title {
+    position: absolute;
+    left: p2r(32);
+    top: p2r(32);
+    padding-left: p2r(20);
+    h3 {
+      color: white;
+      font-size: p2r(64);
+    }
+    p {
+      color: white;
+      font-size: p2r(24);
+      padding-top: p2r(12);
+    }
+    .line {
+      height: 100%;
+      width: p2r(5);
+      background-color: white;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+  //轮播区域1
+  .scroll-page1 {
+    .bg {
+      @include bgc('../images/page2/bg1.png', 576);
+      @include size(576, 573);
+      bottom: p2r(252);
+    }
+    .person {
+      @include bgc('../images/page2/front1.png', 439);
+      @include size(439, 349);
+      bottom: p2r(290);
+      z-index: 1;
+      .files {
+        background-image: url("../images/page2/papers.png");
+        background-repeat: no-repeat;
+        background-position: bottom right;
+        background-size: p2r(115) p2r(114);
+        @include size(85, 50);
+        bottom: p2r(104);
+        left: p2r(27);
+        position: absolute;
+        .paper1 {
+          background-image: url("../images/page2/papers.png");
+          background-repeat: no-repeat;
+          background-position: 0 p2r(-32);
+          background-size: p2r(115) p2r(114);
+          @include size(86, 26);
+          bottom: p2r(45);
+          left: p2r(-70);
+          position: absolute;
+        }
+        .paper2 {
+          background-image: url("../images/page2/papers.png");
+          background-repeat: no-repeat;
+          background-position: p2r(-45) 0;
+          background-size: p2r(115) p2r(114);
+          @include size(64, 20);
+          bottom: p2r(80);
+          right: 0;
+          position: absolute;
+        }
+      }
+    }
+    .message-container {
+      @include bg('../images/page2/txt-bubbl.png');
+      @include size(363, 119);
+      bottom: p2r(140);
+      right: p2r(140);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      .info {
+        @include bg('../images/page2/txt-work.png');
+        @include size(220, 30);
+      }
+    }
+  }
+  //轮播区域2
+  .scroll-page2 {
+    .bg {
+      @include bgc('../images/page2/bg2.png', 582);
+      @include size(582, 520);
+      bottom: p2r(252);
+    }
+    .person {
+      @include bgc('../images/page2/relax.png', 436);
+      @include size(436, 332);
+      bottom: p2r(270);
+      z-index: 1;
+      .leg1 {
+        @include bg('../images/page2/leg1.png');
+        @include size(113, 24);
+        bottom: p2r(110);
+        left: p2r(195);
+      }
+      .leg2 {
+        @include bg('../images/page2/leg2.png');
+        @include size(85, 71);
+        bottom: p2r(120);
+        left: p2r(193);
+      }
+    }
+    .message-container {
+      @include bg('../images/page2/txt-bubbl.png');
+      @include size(363, 119);
+      bottom: p2r(140);
+      right: p2r(140);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      .info {
+        @include bg('../images/page2/txt-life.png');
+        @include size(224, 31);
+      }
+    }
+  }
+  .scroll-page3 {
+    .bg {
+      @include bgc('../images/page2/bg3.png', 561);
+      @include size(561, 516);
+      bottom: p2r(270);
+    }
+    .person {
+      @include bgc('../images/page2/person.png', 503);
+      @include size(503, 229);
+      bottom: p2r(300);
+      z-index: 1;
+      .word1 {
+        @include bg('../images/page2/word1.png');
+        @include size(92, 83);
+        left: p2r(7);
+        bottom: p2r(194);
+      }
+      .word2 {
+        @include bg('../images/page2/word2.png');
+        @include size(77, 70);
+        left: p2r(115);
+        bottom: p2r(245);
+      }
+      .word3 {
+        @include bg('../images/page2/word3.png');
+        @include size(115, 104);
+        right: p2r(130);
+        bottom: p2r(220);
+      }
+      .word4 {
+        @include bg('../images/page2/word4.png');
+        @include size(79, 73);
+        right: p2r(12);
+        bottom: p2r(230);
+      }
+    }
+    .message-container {
+      @include bg('../images/page2/txt-bubbl.png');
+      @include size(363, 119);
+      bottom: p2r(140);
+      right: p2r(140);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 1;
+      .info {
+        @include bg('../images/page2/txt-res.png');
+        @include size(220, 30);
+      }
+    }
+  }
+  .sphere {
+    @include bgc('../images/page2/sphere1.png', 640);
+    @include size(640, 356);
+    bottom: p2r(0);
+  }
+  .bear {
+    @include bg('../images/page2/bear1.png');
+    @include size(178, 134);
+    right: p2r(38);
+    bottom: 0;
+  }
+}
+
+.page2 {
+  background-color: #ee4143;
+  .title {
+    position: absolute;
+    left: p2r(32);
+    top: p2r(32);
+    padding-left: p2r(20);
+    h3 {
+      color: white;
+      font-size: p2r(64);
+    }
+    p {
+      color: white;
+      font-size: p2r(24);
+      padding-top: p2r(12);
+    }
+    .line {
+      height: 100%;
+      width: p2r(5);
+      background-color: white;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+  }
+  .bg {
+    @include bgc('../images/page3/bg4_.png', 592);
+    @include size(592, 490);
+    bottom: p2r(330);
+  }
+
+  .bear {
+    background-image: url("../images/page3/bear2.png");
+    background-repeat: no-repeat;
+    background-size: p2r(368) p2r(427);
+    background-position: p2r(-103) p2r(-96);
+    position: absolute;
+    bottom: p2r(310);
+    left: 50%;
+    margin-left: p2r(-227/2);
+    @include size(227, 336);
+    z-index: 1;
+    .face1 {
+      @include bg('../images/page3/face1.png');
+      @include size(102, 102);
+      top: 0;
+      left: p2r(-102);
+    }
+    .face2 {
+      @include bg('../images/page3/face2.png');
+      @include size(101, 102);
+      top: p2r(-102);
+      right: p2r(-102/2);
+    }
+    .hand-left {
+      @include bg('../images/page3/hand-left_.png');
+      @include size(74, 77);
+      top: p2r(180);
+      left: p2r(30);
+    }
+    .hand-right {
+      @include bg('../images/page3/hand-right.png');
+      @include size(74, 77);
+      top: p2r(180);
+      right: p2r(30);
+    }
+
+  }
+
+  .sphere {
+    @include bg('../images/page3/sphere2.png');
+    @include size(640, 356);
+    bottom: 0;
+  }
+
+  .table {
+    @include bgc('../images/page3/table.png', 514);
+    @include size(514, 258);
+    bottom: p2r(140);
+    z-index: 1;
+  }
+
+  .food {
+    @include bgc('../images/page3/foods.png', 354);
+    @include size(354, 152);
+    bottom: p2r(330);
+    z-index: 1;
+  }
+
+}
+
+.page3 {
+  background-color: #dd8a03;
+  .bg {
+    @include bgc('../images/page4/bg5.png', 592);
+    @include size(592, 580);
+    bottom: p2r(300);
+  }
+
+  .bear {
+    @include bgc('../images/page4/bear3.png', 206);
+    @include size(206, 321);
+    bottom: p2r(195);
+    z-index: 1;
+  }
+
+  .animation-bear-box {
+    .animate-bear1 {
+      @include bgc('../images/page4/bear3-1-1.png', 251);
+      bottom: p2r(195);
+      @include size(251, 335);
+      z-index: 1;
+      opacity: 0;
+    }
+    .animate-bear2 {
+      @include bgc('../images/page4/bear3-2-1.png', 215);
+      bottom: p2r(195);
+      @include size(215, 313);
+      z-index: 1;
+      opacity: 0;
+    }
+    .animate-bear3 {
+      @include bgc('../images/page4/bear3-3-1.png', 290);
+      bottom: p2r(195);
+      @include size(290, 321);
+      z-index: 1;
+      opacity: 0;
+    }
+  }
+
+  .sphere {
+    @include bg('../images/page4/sphere3.png');
+    @include size(640, 356);
+    bottom: 0;
+  }
+
+  .license {
+    @include bg('../images/page4/license.png');
+    @include size(197, 140);
+    bottom: p2r(500);
+    left: p2r(40);
+  }
+
+  .oil {
+    @include bgc('../images/page4/oil.png', 205);
+    @include size(205, 107);
+    bottom: p2r(660);
+  }
+
+  .evil {
+    @include bg('../images/page4/evil2.png');
+    @include size(198, 163);
+    bottom: p2r(480);
+    right: p2r(30);
+  }
+
+  .hit-card-box {
+    .card1 {
+      @include bg('../images/page4/license1.png');
+      @include size(228, 151);
+      bottom: p2r(500);
+      left: p2r(40);
+      opacity: 0;
+    }
+    .card2 {
+      @include bgc('../images/page4/oil1.png', 231);
+      @include size(231, 156);
+      bottom: p2r(660);
+      opacity: 0;
+    }
+    .card3 {
+      @include bg('../images/page4/evil21.png');
+      @include size(211, 173);
+      bottom: p2r(480);
+      right: p2r(30);
+      opacity: 0;
+    }
+  }
+
+}
+
+.page4 {
+  background-color: #3fa100;
+  .bg {
+    @include bgc('../images/page5/bg6.png', 588);
+    @include size(588, 333);
+    bottom: p2r(300);
+  }
+
+  .bear {
+    @include bg('../images/page5/bear4.png');
+    @include size(309, 325);
+    bottom: p2r(170);
+    left: p2r(200);
+    z-index: 1;
+  }
+
+  .sphere {
+    @include bg('../images/page5/sphere4.png');
+    @include size(640, 356);
+    bottom: 0;
+  }
+
+  .card1 {
+    @include bg('../images/page5/card1.png');
+    @include size(160, 175);
+    bottom: p2r(435);
+    left: p2r(32);
+  }
+
+  .card2 {
+    @include bgc('../images/page5/card2.png', 161);
+    @include size(161, 209);
+    bottom: p2r(530);
+  }
+
+  .card3 {
+    @include bg('../images/page5/card3.png');
+    @include size(167, 184);
+    bottom: p2r(420);
+    right: p2r(45);
+  }
+}
+
+.page5 {
+  background-color: #0098cf;
+  .bg {
+    @include bgc('../images/page6/bg7.png', 594);
+    @include size(594, 493);
+    bottom: p2r(300);
+  }
+
+  .bear {
+    @include bgc('../images/page6/rider2.png', 230);
+    @include size(230, 390);
+    bottom: p2r(175);
+    z-index: 1;
+    .smoke {
+      @include bgc('../images/page6/shadow.png', 114);
+      @include size(114, 26);
+      bottom: 0;
+    }
+  }
+
+  .sphere {
+    @include bg('../images/page6/sphere5.png');
+    @include size(640, 356);
+    bottom: 0;
+  }
+
+  .cloud {
+    @include bgc('../images/page6/weather-cloud.png', 432);
+    @include size(432, 160);
+    bottom: p2r(175+390+80);
+    .snow {
+      @include bg('../images/page6/snow-piece.png');
+      @include size(32, 32);
+      bottom: 0;
+      opacity: 0;
+    }
+    .snow:nth-child(2) {
+      left: p2r(32);
+    }
+    .snow:nth-child(3) {
+      left: p2r(32*2);
+    }
+    .snow:nth-child(4) {
+      left: p2r(32*3);
+    }
+    .snow:nth-child(5) {
+      left: p2r(32*4);
+    }
+    .snow:nth-child(6) {
+      left: p2r(32*5);
+    }
+  }
+}
+
+.page6 {
+  background-color: #b527a0;
+  .bg {
+    @include bgc('../images/page7/bg8.png', 588);
+    @include size(588, 333);
+    bottom: p2r(300);
+  }
+
+  .bear {
+    @include bgc('../images/page7/bear5.png', 285);
+    @include size(285, 328);
+    bottom: p2r(200);
+    z-index: 1;
+    .gift-box {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      .gift1 {
+        @include bgc('../images/page7/gift1.png', 35);
+        @include size(35, 29);
+      }
+      .gift2 {
+        @include bgc('../images/page7/gift2.png', 93);
+        @include size(93, 79);
+      }
+      .gift3 {
+        @include bgc('../images/page7/gift3.png', 72);
+        @include size(72, 64);
+      }
+      .gift4 {
+        @include bgc('../images/page7/gift4.png', 91);
+        @include size(91, 73);
+      }
+      .gift5 {
+        @include bgc('../images/page7/gift5.png', 99);
+        @include size(99, 65);
+      }
+      .gift6 {
+        @include bgc('../images/page7/gift6.png', 107);
+        @include size(107, 80);
+      }
+      .gift7 {
+        @include bgc('../images/page7/gift7.png', 107);
+        @include size(107, 80);
+      }
+      .gift8 {
+        @include bgc('../images/page7/gift8.png', 88);
+        @include size(88, 64);
+      }
+      .gift9 {
+        @include bgc('../images/page7/gift9.png', 78);
+        @include size(78, 50);
+      }
+      .gift10 {
+        @include bgc('../images/page7/gift10.png', 49);
+        @include size(49, 37);
+      }
+      .gift11 {
+        @include bgc('../images/page7/gift11.png', 51);
+        @include size(51, 31);
+      }
+      .gift12 {
+        @include bgc('../images/page7/gift12.png', 37);
+        @include size(37, 23);
+      }
+    }
+    .gift-box {
+      position: absolute;
+      top: 0;
+      left: 50%;
+      > div:nth-child(1) {
+        @include size(35, 29);
+        transform: rotateZ(28deg) translateY(p2r(290));
+      }
+      > div:nth-child(2) {
+        @include size(93, 79);
+        transform: rotateZ(28deg*2) translateY(p2r(290));
+      }
+      > div:nth-child(3) {
+        @include size(72, 64);
+        transform: rotateZ(28deg*3) translateY(p2r(290));
+      }
+      > div:nth-child(4) {
+        @include size(91, 73);
+        transform: rotateZ(28deg*4) translateY(p2r(290));
+      }
+      > div:nth-child(5) {
+        @include size(99, 65);
+        transform: rotateZ(28deg*5) translateY(p2r(290));
+      }
+      > div:nth-child(6) {
+        @include size(107, 80);
+        transform: rotateZ(28deg*6) translateY(p2r(290));
+      }
+      > div:nth-child(7) {
+        @include size(107, 80);
+        transform: rotateZ(28deg*7) translateY(p2r(290));
+      }
+      > div:nth-child(8) {
+        @include size(88, 64);
+        transform: rotateZ(28deg*8) translateY(p2r(290));
+      }
+      > div:nth-child(9) {
+        @include size(78, 50);
+        transform: rotateZ(28deg*9) translateY(p2r(290));
+      }
+      > div:nth-child(10) {
+        @include size(49, 37);
+        transform: rotateZ(28deg*10) translateY(p2r(290));
+      }
+      > div:nth-child(11) {
+        @include size(51, 31);
+        transform: rotateZ(28deg*11) translateY(p2r(290));
+      }
+      > div:nth-child(12) {
+        @include size(37, 23);
+        transform: rotateZ(28deg*12) translateY(p2r(290));
+      }
+    }
+  }
+
+  .sphere {
+    @include bg('../images/page7/sphere6.png');
+    @include size(640, 356);
+    bottom: 0;
+  }
+}
+
+.page7 {
+  background-color: #19072a;
+  .streetlight {
+    @include bg('../images/page8/streetlight.png');
+    @include size(80, 443);
+    bottom: p2r(300);
+    left: p2r(240);
+    .light {
+      @include bg('../images/page8/lamplight.png');
+      @include size(437, 427);
+      top: p2r(10);
+      left: p2r(-140);
+    }
+  }
+  .bear {
+    @include bg('../images/page8/bear6.png');
+    @include size(276, 271);
+    bottom: p2r(280);
+    left: p2r(230);
+  }
+  .motobike {
+    @include bg('../images/page8/moto.png');
+    @include size(200, 137);
+    bottom: p2r(335);
+    left: p2r(110);
+  }
+  .share {
+    @include bgc('../images/page8/share.png', 379);
+    @include size(379, 113);
+    bottom: p2r(140);
+  }
+  .info {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    font-size: p2r(24);
+    color: #b579d6;
+    bottom: p2r(70);
+  }
+  .sphere {
+    @include bg('../images/page8/sphere7.png');
+    @include size(640, 384);
+    bottom: 0;
+  }
+
+}
+
+/*定义动画*/
+// 进度条动画
+@keyframes steps {
+  to {
+    width: 100%;
+  }
+}
+
+//熊开车动画
+@keyframes bearRide {
+  10% {
+    transform: translateX(p2r(-26*1)) translateY(p2r(-5));
+  }
+  20% {
+    transform: translateX(p2r(-26*2)) translateY(p2r(5));
+  }
+  30% {
+    transform: translateX(p2r(-26*3)) translateY(p2r(-5));
+  }
+  40% {
+    transform: translateX(p2r(-26*4)) translateY(p2r(5));
+  }
+  50% {
+    transform: translateX(p2r(-26*5)) translateY(p2r(-5));
+  }
+  60% {
+    transform: translateX(p2r(-26*6)) translateY(p2r(5));
+  }
+  70% {
+    transform: translateX(p2r(-26*7)) translateY(p2r(-5));
+  }
+  80% {
+    transform: translateX(p2r(-26*8)) translateY(p2r(5));
+  }
+  90% {
+    transform: translateX(p2r(-26*9)) translateY(p2r(-5));
+  }
+  100% {
+    transform: translateX(p2r(-26*10)) translateY(p2r(5));
+  }
+}
+
+.loading {
+  .progress {
+    background-color: transparent;
+    .step {
+      height: 100%;
+      width: 20%;
+      background-color: #ff2947;
+      right: 0;
+      position: absolute;
+    }
+  }
+}
+
+.loading.animate {
+  .step {
+    animation: steps .5s linear forwards;
+  }
+  .rider {
+    animation: bearRide .5s linear forwards;
+  }
+}
+
+// welcome动画
+
+@keyframes grass1 {
+  to {
+    height: p2r(396);
+  }
+}
+
+@keyframes grass2 {
+  from {
+    transform: scale(2, 1);
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes trees {
+  from {
+    transform: translateY(-200%);
+  }
+  80% {
+    transform: translateY(10%);
+  }
+  90% {
+    transform: translateY(-10%);
+  }
+  100% {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes btnAppear {
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes bearDown {
+  from {
+    transform: translateY(-50%);
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes upandDown {
+  from {
+    transform: translateY(-5%);
+  }
+  to {
+    transform: none;
+  }
+}
+
+@keyframes small2big {
+  from {
+    transform: scale(0, 0);
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes bearDisappear {
+  from {
+    opacity: 1;
+  }
+  to {
+    transform: translateY(100%) scale(1.5, 1.5);
+    opacity: 0;
+  }
+}
+
+// 欢迎页的默认样式
+.welcome {
+  .grass1 {
+    height: p2r(20);
+  }
+  .grass2 {
+    opacity: 0;
+  }
+  .trees {
+    opacity: 0;
+  }
+  .rotate-btn-box {
+    opacity: 0;
+    transform: scale(0, 0);
+  }
+  .bear-box {
+    opacity: 0;
+  }
+  .smoke {
+    opacity: 0;
+  }
+  .info {
+    opacity: 0;
+  }
+  .hello {
+    opacity: 0;
+  }
+}
+
+.welcome.animate {
+  .grass1 {
+    animation: grass1 0.5s forwards;
+  }
+  .grass2 {
+    animation: grass2 0.5s 0.5s forwards;
+  }
+  .trees {
+    animation: trees 0.5s 1s forwards;
+  }
+  .rotate-btn-box {
+    animation: btnAppear 0.5s 1.5s forwards;
+  }
+  .circle2 {
+    animation: rotate 1s infinite linear;
+  }
+  .bear-box {
+    animation: bearDown 0.5s 2s forwards;
+  }
+  .bear {
+    animation: upandDown 0.5s 2.5s infinite;
+  }
+  .smoke {
+    animation: small2big 0.5s 2.5s infinite;
+  }
+  .info {
+    animation: bearDown 0.5s 3s forwards;
+  }
+  .hello {
+    animation: small2big 0.5s 3.5s forwards;
+  }
+}
+
+//标题动画
+@keyframes right2left {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes heightBigger {
+  from {
+
+  }
+  to {
+    height: 100%;
+  }
+}
+
+.title {
+  h3 {
+    opacity: 0;
+  }
+  p {
+    opacity: 0;
+  }
+  .line {
+    height: 0% !important;
+  }
+}
+
+.swiper-slide.animate {
+  .title {
+    h3 {
+      animation: right2left .5s forwards;
+    }
+    p {
+      animation: right2left .5s .2s forwards;
+    }
+    .line {
+      animation: heightBigger .5s .5s forwards;
+    }
+  }
+}
+
+//区域1的轮播部分
+@keyframes rotateInOut {
+  0% {
+    transform: rotateZ(90deg);
+  }
+  25% {
+    transform: rotateZ(-5deg);
+    opacity: 1;
+  }
+  30% {
+    transform: rotateZ(0);
+    opacity: 1;
+  }
+  65% {
+    transform: rotateZ(0);
+    opacity: 1;
+  }
+  70% {
+    transform: rotateZ(5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateZ(-90deg);
+    opacity: 0;
+  }
+}
+
+@keyframes rotateInNotOut {
+  0% {
+    transform: rotateZ(90deg);
+  }
+  95% {
+    transform: rotateZ(-5deg);
+    opacity: 1;
+  }
+  100% {
+    transform: rotateZ(0);
+    opacity: 1;
+  }
+}
+
+// 区域1轮播3 语言上下左右晃动
+@keyframes runUpDownLeftRight {
+  25% {
+    transform: translateX(10%) translateY(0%);
+  }
+  50% {
+    transform: translateX(-10%) translateY(10%);
+  }
+  75% {
+    transform: translateX(0%) translateY(-10%);
+  }
+  100% {
+    transform: translateX(0%) translateY(0%);
+  }
+}
+
+// 区域1轮播1 纸
+@keyframes left2Right2Left {
+  30% {
+    transform: translateX(-50%);
+  }
+  60% {
+    transform: translateX(50%);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+// 区域1轮播2 腿
+@keyframes rotateBack {
+  to {
+    transform: none;
+  }
+}
+
+.page1 {
+  .scroll-page1 {
+    .bg {
+      opacity: 0;
+      transform-origin: 50% 200%;
+    }
+    .person {
+      opacity: 0;
+      transform-origin: 50% 200%;
+    }
+    .message-container {
+      opacity: 0;
+      transform-origin: right bottom;
+    }
+  }
+  .scroll-page2 {
+    .bg {
+      opacity: 0;
+      transform-origin: 50% 200%;
+    }
+    .person {
+      opacity: 0;
+      transform-origin: 50% 200%;
+      .leg2 {
+        transform-origin: left bottom;
+        transform: rotateZ(30deg);
+      }
+    }
+    .message-container {
+      opacity: 0;
+      transform-origin: right bottom;
+    }
+  }
+  .scroll-page3 {
+    .bg {
+      opacity: 0;
+      transform-origin: 50% 200%;
+    }
+    .person {
+      opacity: 0;
+      transform-origin: 50% 200%;
+    }
+    .message-container {
+      opacity: 0;
+      transform-origin: right bottom;
+    }
+  }
+}
+
+.page1.animate {
+  .scroll-page1 {
+    .bg {
+      animation: rotateInOut 1.5s forwards;
+    }
+    .person {
+      animation: rotateInOut 1.5s .2s forwards;
+      .paper1 {
+        animation: left2Right2Left 1s infinite;
+      }
+      .paper2 {
+        animation: left2Right2Left .5s infinite;
+      }
+    }
+    .message-container {
+      animation: rotateInOut 1.5s .5s forwards;
+    }
+  }
+  .scroll-page2 {
+    .bg {
+      animation: rotateInOut 1.5s 1.7s forwards;
+    }
+    .person {
+      animation: rotateInOut 1.5s 1.9s forwards;
+      .leg2 {
+        animation: rotateBack .5s 2.2s forwards;
+      }
+    }
+    .message-container {
+      animation: rotateInOut 1.5s 2.2s forwards;
+    }
+  }
+  .scroll-page3 {
+    .bg {
+      animation: rotateInNotOut .5s 3.4s forwards;
+    }
+    .person {
+      animation: rotateInNotOut .5s 3.6s forwards;
+    }
+    .message-container {
+      animation: rotateInNotOut .5s 3.9s forwards;
+    }
+    .word1 {
+      animation: runUpDownLeftRight 1s infinite;
+    }
+    .word2 {
+      animation: runUpDownLeftRight .5s infinite;
+    }
+    .word3 {
+      animation: runUpDownLeftRight 1.2s infinite;
+    }
+    .word4 {
+      animation: runUpDownLeftRight 1.5s infinite;
+    }
+  }
+}
+
+// 区域2
+// 从下到上
+@keyframes bottom2Top {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+// 笑脸
+@keyframes small2big2small {
+  from {
+    transform: scale(0, 0);
+  }
+  95% {
+    transform: scale(1.2, 1.2);
+    opacity: 1;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+// 晃动小手
+@keyframes leftShake {
+  30% {
+    transform: rotateZ(5deg);
+  }
+  60% {
+    transform: rotateZ(-5deg);
+  }
+  100% {
+    transform: none;
+  }
+}
+
+.page2 {
+  .bear {
+    opacity: 0;
+    .face1 {
+      opacity: 0;
+    }
+    .face2 {
+      opacity: 0;
+    }
+    .hand-left {
+      transform-origin: left top;
+    }
+    .hand-right {
+      transform-origin: right top;
+    }
+  }
+  .table {
+    opacity: 0;
+  }
+  .food {
+    opacity: 0;
+  }
+  .bg {
+    opacity: 0;
+    transform-origin: 50% 200%;
+  }
+}
+
+.page2.animate {
+  .bg {
+    animation: rotateNotInOut .5s forwards;
+  }
+  .table {
+    animation: bearDown .5s .5s forwards;
+  }
+  .bear {
+    animation: bottom2Top .5s 1s forwards;
+    .face1 {
+      animation: small2big2small .5s 2s forwards;
+    }
+    .face2 {
+      animation: small2big2small .5s 2s forwards;
+    }
+    .hand-left {
+      animation: leftShake .5s infinite;
+    }
+    .hand-right {
+      animation: leftShake .8s infinite;
+    }
+  }
+  .food {
+    animation: bearDown 1s 1.5s forwards;
+  }
+}
+
+// 区域3
+.bg {
+  transform-origin: 50% 200%;
+}
+
+.page3 {
+  .bg {
+    opacity: 0;
+  }
+  .bear {
+    opacity: 0;
+  }
+  .license {
+    opacity: 0;
+  }
+  .oil {
+    opacity: 0;
+  }
+  .evil {
+    opacity: 0;
+  }
+}
+
+.page3.animate {
+  .bg {
+    animation: rotateInNotOut .5s forwards;
+  }
+  .bear {
+    animation: bearDown .5s .5s forwards;
+  }
+  .license {
+    animation: small2big2small .5s 1s forwards, runUpDownLeftRight .5s 1.5s infinite;
+  }
+  .oil {
+    animation: small2big2small .5s 1s forwards, runUpDownLeftRight .3s 1.5s infinite;
+  }
+  .evil {
+    animation: small2big2small .5s 1s forwards, runUpDownLeftRight .7s 1.5s infinite;
+  }
+}
+
+// 防止溢出滚动
+.waimai-container {
+  overflow: hidden;
+}
+
+// 区域4
+.page4 {
+  .bg {
+    opacity: 0;
+  }
+  .bear {
+    opacity: 0;
+  }
+  .card1 {
+    opacity: 0;
+  }
+  .card2 {
+    opacity: 0;
+  }
+  .card3 {
+    opacity: 0;
+  }
+}
+
+.page4.animate {
+  .bg {
+    animation: rotateInNotOut .5s forwards;
+  }
+  .bear {
+    animation: bearDown .5s .5s forwards;
+  }
+  .card1 {
+    animation: small2big2small .5s 1s forwards;
+  }
+  .card2 {
+    animation: small2big2small .5s 1s forwards;
+  }
+  .card3 {
+    animation: small2big2small .5s 1s forwards;
+  }
+}
+
+// 区域5
+@keyframes snowLeft {
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(1000%) translateX(-200%);
+    opacity: 1;
+  }
+}
+
+@keyframes snowRight {
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(1000%) translateX(200%);
+    opacity: 1;
+  }
+}
+
+.page5 {
+  .bg {
+    opacity: 0;
+  }
+  .bear {
+    opacity: 0;
+  }
+  .cloud {
+    opacity: 0;
+  }
+  .smoke {
+    opacity: 0;
+  }
+}
+
+.page5.animate {
+  .bg {
+    animation: rotateInNotOut .5s forwards;
+  }
+  .bear {
+    animation: bearDown .5s .5s forwards, upandDown 0.5s 1s infinite;
+  }
+  .smoke {
+    animation: small2big 0.5s 1s infinite;
+  }
+  .cloud {
+    animation: small2big2small 0.5s 1s forwards, runUpDownLeftRight 1s 1.5s infinite;
+    .snow:nth-child(1) {
+      animation: snowLeft .5s 1.5s infinite;
+    }
+    .snow:nth-child(2) {
+      animation: snowRight .3s 1.5s infinite;
+    }
+    .snow:nth-child(3) {
+      animation: snowLeft 1s 1.5s infinite;
+    }
+    .snow:nth-child(4) {
+      animation: snowRight 1.5s 1.5s infinite;
+    }
+    .snow:nth-child(5) {
+      animation: snowLeft 1.2s 1.5s infinite;
+    }
+    .snow:nth-child(6) {
+      animation: snowRight .8s 1.5s infinite;
+    }
+  }
+}
+
+// 区域6
+@keyframes none2Normal {
+  from {
+    transform: none;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes big2small {
+  to {
+    transform: scale(0, 0);
+    opacity: 0;
+  }
+}
+
+.page6 {
+  .gift-box > div {
+    opacity: 0;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+  }
+}
+
+.page6.animate {
+  @for $i from 1 through 12 {
+    .gift-box > div:nth-child(#{$i}) {
+      animation: none2Normal 2s $i*0.1s infinite;
+    }
+  }
+  @for $i from 1 through 12 {
+    .gift-box > div:nth-child(#{$i}) > div {
+      animation: rotate 1s ($i*0.1s) infinite;
+    }
+  }
+}
+
+//播放按钮样式
+.audioControl {
+  @include size(36, 36);
+  position: absolute;
+  top: p2r(32);
+  right: p2r(32);
+  background: url("../images/pause.png") no-repeat center / 100% 100%;
+  z-index: 999;
+}
